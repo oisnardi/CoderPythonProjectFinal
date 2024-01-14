@@ -38,11 +38,15 @@
               <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Hola {{ user.first_name }}
-                <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40" height="40" class="rounded-circle">
+                {% if 'avatar_url' in request.session %}
+                    <img src="{{ request.session.avatar_url }}" alt="Imagen de perfil" width="40" height="40" class="rounded-circle">
+                {% else %}
+                    <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40" height="40" class="rounded-circle">
+                {% endif %}
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="{% url 'editar_perfil' %}">Editar Perfil</a>
-
+                <a class="dropdown-item" href="{% url 'avatar' %}">Cambiar imágen</a>
                 <a class="dropdown-item" href="#" onclick="document.getElementById('logoutForm').submit(); return false;">Cerrar Sesión</a>
                 <form id="logoutForm" method="post" action="{% url 'Logout' %}">
                   {% csrf_token %}

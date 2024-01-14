@@ -8,9 +8,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 
-from .models import Page
+from .models import Avatar, Page
 
 from blogapp.forms import (
+    AvatarFormulario,
     UserRegistrationForm,
     UserEditForm,
 )
@@ -65,8 +66,13 @@ def registrar(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.success(request, '¡Usuario registrado exitosamente!')
 
+                # Set URL Avatar to Sessión
+                avatar = Avatar.objects.get_or_create(user=user)[0]
+
+                if avatar.image:
+                    request.session['avatar_url'] = avatar.image.url
+    
                 return redirect('index')
         else:
             messages.error(request, 'Datos incorrectos')
@@ -89,8 +95,15 @@ def login_request(request):
 
             if user is not None:
                 login(request, user)
+                avatar = Avatar.objects.get_or_create(user=user)[0]
 
-                return render(request, 'index.html')                
+                # Set URL Avatar to Sessión
+                avatar = Avatar.objects.get_or_create(user=user)[0]
+
+                if avatar.image:
+                    request.session['avatar_url'] = avatar.image.url
+    
+                return redirect('index')
             else:
                 messages.error(request, 'Datos incorrectos')
         else:
@@ -121,7 +134,7 @@ def editar_perfil(request):
 
             usuario.save()
 
-            return render(request, "index.html")
+            return redirect('index')
 
 
     print(f"editar_perfil -- GET")
@@ -135,4 +148,35 @@ def editar_perfil(request):
 
     return render(request, "usuario_editar.html", {"form": formulario}) 
 
+@login_required
+def avatar(request):
+    if request.method == "POST":
+        print("avatar - POST")
+        formulario = AvatarFormulario(request.POST, request.FILES)
+
+        if formulario.is_valid():
+            print("avatar - Is_Valid!")
+            user = request.user
+
+            avatar = Avatar.objects.filter(user=user).first()
+            if avatar:
+                avatar.delete()
+
+            avatar = Avatar.objects.create(user=user, image=formulario.cleaned_data.get("image"))
+
+            print("avatar - Success!")
+            #messages.success(request, 'Imagen de perfil actualizada exitosamente.')
+
+            # Set URL Avatar to Sessión
+            avatar = Avatar.objects.get_or_create(user=user)[0]
+
+            if avatar.image:
+                request.session['avatar_url'] = avatar.image.url
+  
+            return redirect('index')
+
+
+    formulario = AvatarFormulario()
+
+    return render(request, 'usuario_avatar.html', {"form": formulario})
 # END SECCIÓN USUARIOS
