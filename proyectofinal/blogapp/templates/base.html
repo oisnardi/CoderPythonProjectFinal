@@ -24,11 +24,13 @@
                 <a class="nav-link" href="{% url 'about' %}">ABOUT</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/admin">ADMIN</a>
+                <a class="nav-link" href="/admin/">ADMIN</a>
               </li>
+              {% if request.user.is_authenticated %}
               <li class="nav-item">
-                <a class="nav-link" href="">Crear Post</a>
+                <a class="nav-link" href="">PUBLICAR</a>
               </li>
+              {% endif %}
             </ul>
           </div>
         <!--</div>-->
