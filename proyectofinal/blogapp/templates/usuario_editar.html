@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Perfil Usuario{% endblock %}
+
+{% block content %}
+</br>
+</br>
+<div class="container">
+    <!-- Utiliza la clase 'row' para una fila y 'col-md-6' para un ancho de columna medio -->
+    <form action="{% url 'editar_perfil' %}" method="post" class="col-md-12">
+        {% csrf_token %}
+        <!-- Utiliza clases de Bootstrap para estilizar la tabla -->
+        <table class="table-dark mx-auto w-auto">
+            {{ form.as_table }}
+        </table>
+        <!-- Utiliza la clase 'btn' y 'btn-primary' para estilizar el botón -->
+        </br>
+        <div class="text-center">
+          <input type="submit" value="Enviar" class="btn btn-primary">
+          <input type="cancel" value="Cancelar" class="btn btn-secondary" onclick="location.href ='{% url 'index' %}'">
+        </div>
+
+    </form>
+</div>
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-danger" role="alert">
+        {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+{% endblock %}
