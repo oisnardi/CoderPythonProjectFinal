@@ -38,14 +38,14 @@
           <button type="submit">Cerrar Sesion</button>
         </form>
         {% else %}
-        <button class="btn-17" onclick="location.href = {% url 'login' %}">
+        <button class="btn-17" onclick="location.href ='{% url 'login' %}'">
           <span class="text-container">
             <span class="text">Login</span>
           </span>
         </button>
-        <button class="btn-17" onclick="location.href = {% url 'registrar' %}"">
+        <button class="btn-17" onclick="location.href ='{% url 'registrar' %}'">
           <span class="text-container">
-            <span class="text" href=>Registrar</span>
+            <span class="text">Registrar</span>
           </span>
         </button>
         {% endif %}

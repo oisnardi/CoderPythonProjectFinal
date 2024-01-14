@@ -6,6 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 from .models import Page
 
@@ -65,7 +66,12 @@ def registrar(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('index')  # Redirigir a la página de registro exitoso
+                messages.success(request, '¡Usuario registrado exitosamente!')
+
+                return redirect('index')
+        else:
+            messages.error(request, 'Datos incorrectos')
+       
     else:
         form = UserRegistrationForm()
 
@@ -87,14 +93,13 @@ def login_request(request):
 
                 return render(request, 'index.html')                
             else:
-                return render(request, "login.html", {"mensaje": f"Usuario y/o contraseña incorrectos"})
-
+                messages.error(request, 'Datos incorrectos')
         else:
-            return render(request, "login.html", {"mensaje": f"Usuario y/o contraseña incorrectos"})
-
+            messages.error(request, 'Datos incorrectos')
+            
     form = AuthenticationForm()
 
-    return render(request, "login.html", {"form": form})
+    return render(request, "usuario_login.html", {"form": form})
 
 
 # END SECCIÓN USUARIOS
