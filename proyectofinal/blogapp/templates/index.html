@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog Coder{% endblock %}
+
+{% block content %}
+<ul>
+  {% for page in pages %}
+  <li>
+    <div class="card">
+      <div class="card-details">
+        <p class="text-title">{{ page.title }}</p>
+      </div>
+      <button class="card-button" href="">Ver</button>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+  {% endblock %}

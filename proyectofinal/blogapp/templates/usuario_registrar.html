@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Registrar Usuario{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Utiliza la clase 'row' para una fila y 'col-md-6' para un ancho de columna medio -->
+    <form action="{% url 'registrar' %}" method="post" class="col-md-6">
+        {% csrf_token %}
+        <!-- Utiliza clases de Bootstrap para estilizar la tabla -->
+        <table class="table">
+            {{ form.as_table }}
+        </table>
+        <!-- Utiliza la clase 'btn' y 'btn-primary' para estilizar el botón -->
+        <input type="submit" value="Enviar" class="btn btn-primary">
+    </form>
+</div>
+{% endblock %}
