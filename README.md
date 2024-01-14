@@ -5,4 +5,4 @@ Proyecto Final CoderHouse
 Alejandro Isnardi
 
 Usuarios prueba:
-    palonso | 123456-
+    palonso | 1234567-

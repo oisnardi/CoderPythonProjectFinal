@@ -66,7 +66,7 @@ def page_detail(request, pk):
 # SECCIÓN USUARIOS
 def registrar(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
             # Autenticar al usuario después del registro
@@ -77,7 +77,7 @@ def registrar(request):
                 login(request, user)
                 return redirect('index')  # Redirigir a la página de registro exitoso
     else:
-        form = UserCreationForm()
+        form = UserRegistrationForm()
 
     return render(request, 'usuario_registrar.html', {'form': form})
 

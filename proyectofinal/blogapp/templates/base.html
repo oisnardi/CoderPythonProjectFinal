@@ -32,6 +32,12 @@
             </ul>
           </div>
         <!--</div>-->
+        {% if request.user.is_authenticated %}
+        <form method="post" action="{% url 'Logout' %}">
+          {%csrf_token%}
+          <button type="submit">Cerrar Sesion</button>
+        </form>
+        {% else %}
         <button class="btn-17" onclick="location.href = {% url 'login' %}">
           <span class="text-container">
             <span class="text">Login</span>
@@ -42,6 +48,7 @@
             <span class="text" href=>Registrar</span>
           </span>
         </button>
+        {% endif %}
       </nav>
       
     {% block content %}
