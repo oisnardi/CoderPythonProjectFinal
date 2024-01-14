@@ -5,7 +5,12 @@
 {% block content %}
 <div class="login-box">
         <form action="" method="post" id="login-form"> {% csrf_token %}
-         
+        {% if mensaje %}
+          <div class="alert alert-danger" role="alert">
+            {{ mensaje }}
+          </div>
+        {% endif %}
+
         {# <div class="user-box">
           <input type="text" name="{{ form.username.name }}" required="">
           <label>{{ form.username.label }}</label>

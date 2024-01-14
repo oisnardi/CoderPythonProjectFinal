@@ -23,16 +23,6 @@ def index(request):
 def about(request):
     return render(request, 'about.html')
 
-def user_login(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request, request.POST)
-        if form.is_valid():
-            login(request, form.get_user())
-            return redirect('home')  # Reemplaza 'home' con la URL a la que quieres redirigir después del login
-    else:
-        form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
-
 ## SECCIÓN PAGINAS CRUD
 @login_required
 class PageCreateView(CreateView):
@@ -82,7 +72,6 @@ def registrar(request):
     return render(request, 'usuario_registrar.html', {'form': form})
 
 def login_request(request):
-
     if request.method == "POST":
 
         form = AuthenticationForm(request, data=request.POST)
@@ -96,12 +85,12 @@ def login_request(request):
             if user is not None:
                 login(request, user)
 
-                return render(request, 'index.html', {"mensaje": f"Bienvenido {username}"})                
+                return render(request, 'index.html')                
             else:
-                return render(request, 'index.html', {"mensaje": f"Usuario o contraseña invalidos"})
+                return render(request, "login.html", {"mensaje": f"Usuario y/o contraseña incorrectos"})
 
         else:
-            return render(request, "index.html", {"mensaje": "Datos form incorrectos"})
+            return render(request, "login.html", {"mensaje": f"Usuario y/o contraseña incorrectos"})
 
     form = AuthenticationForm()
 
