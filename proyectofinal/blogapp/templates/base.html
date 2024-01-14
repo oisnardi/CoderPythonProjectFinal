@@ -4,18 +4,16 @@
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
   </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <!-- <div class="container">
-          <a class="navbar-brand" href="{% url 'index' %}">Blog</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button> -->
-          
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="container">
+        <a class="navbar-brand" href="#"></a>
+      </div>  
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
                 <a class="nav-link" href="{% url 'index' %}">HOME</a>
@@ -35,10 +33,23 @@
           </div>
         <!--</div>-->
         {% if request.user.is_authenticated %}
-        <form method="post" action="{% url 'Logout' %}">
-          {%csrf_token%}
-          <button type="submit">Cerrar Sesion</button>
-        </form>
+        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+          <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40" height="40" class="rounded-circle">
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#">Edit Profile</a>
+                <a class="dropdown-item" href="#" onclick="document.getElementById('logoutForm').submit(); return false;">Cerrar Sesión</a>
+                <form id="logoutForm" method="post" action="{% url 'Logout' %}">
+                  {% csrf_token %}
+                  <button type="submit" style="display: none;">Cerrar Sesión</button>
+                </form>
+              </div>
+            </li>   
+          </ul>
+        </div>
         {% else %}
         <button class="btn-17" onclick="location.href ='{% url 'login' %}'">
           <span class="text-container">
@@ -52,8 +63,8 @@
         </button>
         {% endif %}
       </nav>
-      
     {% block content %}
     {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>

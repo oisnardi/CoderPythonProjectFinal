@@ -1,3 +1,12 @@
+
+
+/* Template */
+body {
+  background-color: #020013;
+  color: whitesmoke;
+}
+
+/*Buttons*/
 .rainbow-hover {
     font-size: 16px;
     font-weight: 700;
