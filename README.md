@@ -10,6 +10,7 @@ pip install Pillow
 # Proyecto:
 Web App estilo blog con Python en DJango.
 Front-End basado en Bootstrap, implementa herencia
+Contempla DOS CRUDs Usuarios y Paginas.
 
 # Pagina principal
 Contiene el NavBar con todos los accesos
@@ -38,7 +39,6 @@ http://127.0.0.1:8000/blogapp/logout
 Se pueden cambiar el mail, password, nombre y apellido
 Link: http://127.0.0.1:8000/blogapp/perfil/
 
-
 # Acerca de mí
 Se cuenta una breve descripción de blog y de mi.
 Link: http://127.0.0.1:8000/blogapp/about/
@@ -53,13 +53,12 @@ Desde la misma el usuario puede publicar por cada pagina un título, subtítulo,
 Link: http://127.0.0.1:8000/blogapp/pages/new/
 
 # Pagina por ID
-Permite acceder por ID a cada post
+Permite acceder por ID a cada post ampliar
 Link: http://127.0.0.1:8000/blogapp/pages/1/
 
 # Si no existe ninguna página mostrar un "No hay páginas aún". 
 Tanto en el Index como en Pages se mostrará la leyenda "No hay páginas publicadas." cuando no exita una publicada.
 Link: http://127.0.0.1:8000/blogapp/
-
 
 # Para crear, editar o borrar las fotos debes estar registrado como Administrador.
 Todas las funcionalidades del sitio para editar, borrar o publicar validan que el usuario haya iniciado sesion
@@ -67,6 +66,10 @@ Todas las funcionalidades del sitio para editar, borrar o publicar validan que e
 # Página para publicar una nota
 http://127.0.0.1:8000/blogapp/pages/new/
 
+# Página para editar una nota
+
+
+# Página para borrar una nota
 
 
 Usuarios prueba:
