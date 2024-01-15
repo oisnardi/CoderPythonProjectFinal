@@ -3,10 +3,39 @@
 {% block title %}Title{% endblock %}
 
 {% block content %}
-{% for page in pages %}
 <div class="container mt-5">
-    <h2><a href="{% url 'page_detail' pk=page.pk %}">{{ page.title }}</a></h2>
-    <p>{{ page.content }}</p>
+  {% if pages %}
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for page in pages %}
+      <!--Start CARD-->
+      <div class="col">
+        <div class="card">
+          <img src="{{ page.image.url }}" class="card-img-top" alt="{{ page.title }}">
+
+          <div class="card-body">
+            <h5 class="card-title">{{ page.title }}</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          </div>
+          <div class="btn-group" onclick="location.href='{% url 'page_detail' pk=page.pk %}'">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Continuar leyendo..</button>
+          </div>
+          {% if request.user.is_authenticated %}
+          <div class="btn-group" onclick="location.href='{% url 'page_update' pk=page.pk %}'">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
+          </div>
+          <div class="btn-group" onclick="location.href='{% url 'page_delete' pk=page.pk %}'">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Borrar</button>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      <!--End CARD-->
+      {% endfor %}
+  </div>
+  {% else %}
+    <div class="text-center">
+      <p>No hay páginas publicadas.</p>
+    </div>
+  {% endif %}
 </div>
-{% endfor %}
 {% endblock %}

@@ -4,6 +4,7 @@
 
 {% block content %}
 <div class="container mt-5">
+  {% if pages %}
   <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for page in pages %}
       <!--Start CARD-->
@@ -31,5 +32,10 @@
       <!--End CARD-->
       {% endfor %}
   </div>
+  {% else %}
+    <div class="text-center">
+      <p>No hay páginas publicadas.</p>
+    </div>
+  {% endif %}
 </div>
 {% endblock %}
