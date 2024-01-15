@@ -42,7 +42,7 @@ def page_create(request):
             page = form.save(commit=False)
             page.owner = request.user
             page.save()
-            return redirect('page_list')
+            return redirect('index')
     else:
         form = PageForm()
     return render(request, 'page_form.html', {'form': form})
@@ -54,7 +54,7 @@ def page_update(request, pk):
         form = PageForm(request.POST, request.FILES, instance=page)
         if form.is_valid():
             form.save()
-            return redirect('page_list')
+            return redirect('index')
     else:
         form = PageForm(instance=page)
     return render(request, 'page_form.html', {'form': form})
@@ -64,7 +64,7 @@ def page_delete(request, pk):
     page = get_object_or_404(Page, pk=pk, owner=request.user)
     if request.method == 'POST':
         page.delete()
-        return redirect('page_list')
+        return redirect('index')
     return render(request, 'page_confirm_delete.html', {'page': page})
 ## END CRUD
     

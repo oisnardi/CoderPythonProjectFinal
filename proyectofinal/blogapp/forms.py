@@ -63,6 +63,6 @@ class AvatarFormulario(forms.Form):
 class PageForm(forms.ModelForm):
     class Meta:
         model = Page
-        fields = ['title', 'content', 'image']
+        fields = ['title', 'subtitle', 'content', 'image']
 
 # End Secction Pages

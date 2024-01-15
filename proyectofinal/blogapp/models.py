@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 # Sección Paginas
 class Page(models.Model):
     title = models.CharField(max_length=255)
+    subtitle = models.CharField(max_length=255)
     content = models.TextField()
     image = models.ImageField(upload_to='pages')
     published_date = models.DateTimeField(auto_now_add=True)
