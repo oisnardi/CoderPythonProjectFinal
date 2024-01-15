@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
+{% block title %}Title{% endblock %}
+
 {% block content %}
-  <h2>Confirmar eliminación</h2>
-  <p>¿Esta seguro de eliminar el siguiente post '{{ object.title }}'?</p>
-  <form method="post">
+<h2>¿Estás seguro de que deseas eliminar "{{ page.title }}"?</h2>
+<form method="post">
     {% csrf_token %}
-    <button type="submit">Si, borrar</button>
-  </form>
-  <a href="{% url 'page_detail' pk=object.pk %}">Cancelar</a>
+    <button type="submit">Sí, eliminar</button>
+</form>
 {% endblock %}

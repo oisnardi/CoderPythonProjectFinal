@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
+from .models import Page
+
 # Sección: Usuarios
 class UserRegistrationForm(UserCreationForm):
     username = forms.CharField(label='Nombre de Usuario',
@@ -56,3 +58,11 @@ class AvatarFormulario(forms.Form):
 
 # End Sección Usuarios
 
+# Sección Pages
+
+class PageForm(forms.ModelForm):
+    class Meta:
+        model = Page
+        fields = ['title', 'content', 'image']
+
+# End Secction Pages

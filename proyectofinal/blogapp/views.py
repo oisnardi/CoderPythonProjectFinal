@@ -1,6 +1,7 @@
 from django.views.generic import CreateView, UpdateView, DeleteView
-from django.shortcuts import redirect, render
-from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.decorators import method_decorator
+from django.contrib.auth.views import LogoutView
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate
@@ -12,46 +13,59 @@ from .models import Avatar, Page
 
 from blogapp.forms import (
     AvatarFormulario,
+    PageForm,
     UserRegistrationForm,
     UserEditForm,
 )
-
-
-def index(request):
-    pages = Page.objects.all()
-    return render(request, 'index.html', {'pages': pages})
 
 def about(request):
     return render(request, 'about.html')
 
 ## SECCIÓN PAGINAS CRUD
-@login_required
-class PageCreateView(CreateView):
-    model = Page
-    template_name = 'page_form.html'
-    fields = ['title', 'content', 'image']
-    success_url = reverse_lazy('page_list')
+def index(request):
+    pages = Page.objects.all()
+    return render(request, 'index.html', {'pages': pages})
 
-    def form_valid(self, form):
-        form.instance.owner = self.request.user
-        return super().form_valid(form)
-
-@login_required
-class PageUpdateView(UpdateView):
-    model = Page
-    template_name = 'page_form.html'
-    fields = ['title', 'content', 'image']
-    success_url = reverse_lazy('page_list')
-
-@login_required
-class PageDeleteView(DeleteView):
-    model = Page
-    template_name = 'page_confirm_delete.html'
-    success_url = reverse_lazy('page_list')
+def page_list(request):
+    pages = Page.objects.all()
+    return render(request, 'page_list.html', {'pages': pages})
 
 def page_detail(request, pk):
-    page = Page.objects.get(pk=pk)
+    page = get_object_or_404(Page, pk=pk)
     return render(request, 'page_detail.html', {'page': page})
+
+@login_required
+def page_create(request):
+    if request.method == 'POST':
+        form = PageForm(request.POST, request.FILES)
+        if form.is_valid():
+            page = form.save(commit=False)
+            page.owner = request.user
+            page.save()
+            return redirect('page_list')
+    else:
+        form = PageForm()
+    return render(request, 'page_form.html', {'form': form})
+
+@login_required
+def page_update(request, pk):
+    page = get_object_or_404(Page, pk=pk, owner=request.user)
+    if request.method == 'POST':
+        form = PageForm(request.POST, request.FILES, instance=page)
+        if form.is_valid():
+            form.save()
+            return redirect('page_list')
+    else:
+        form = PageForm(instance=page)
+    return render(request, 'page_form.html', {'form': form})
+
+@login_required
+def page_delete(request, pk):
+    page = get_object_or_404(Page, pk=pk, owner=request.user)
+    if request.method == 'POST':
+        page.delete()
+        return redirect('page_list')
+    return render(request, 'page_confirm_delete.html', {'page': page})
 ## END CRUD
     
 # SECCIÓN USUARIOS

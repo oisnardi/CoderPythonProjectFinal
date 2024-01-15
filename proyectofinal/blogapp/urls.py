@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import LogoutView
-from .views import PageCreateView, PageDeleteView, PageUpdateView, avatar, editar_perfil, index, login_request, page_detail, about, registrar
+from .views import CustomLogoutView, avatar, editar_perfil, index, login_request, page_create, page_delete, page_detail, about, page_list, page_update, registrar
 
 urlpatterns = [
     # Rutas para el administrador de Django
@@ -15,11 +15,12 @@ urlpatterns = [
     path("logout", LogoutView.as_view(template_name="index.html"), name='Logout'),
     path('perfil/', editar_perfil, name='editar_perfil'),
     path('avatar', avatar, name='avatar'),
-    # Page
-    # path('create/', PageCreateView.as_view(), name='page_create'),
-    # path('<int:pk>/update/', PageUpdateView.as_view(), name='page_update'),
-    # path('<int:pk>/delete/', PageDeleteView.as_view(), name='page_delete'),
-    # path('pages/<int:pk>', page_detail, name='page_detail'),
+    # Pages
+    path('pages/', page_list, name='page_list'),
+    path('pages/<int:pk>/', page_detail, name='page_detail'),
+    path('pages/new/', page_create, name='page_create'),
+    path('pages/<int:pk>/edit/', page_update, name='page_update'),
+    path('pages/<int:pk>/delete/', page_delete, name='page_delete'),
     # Acerca de
     path('about/', about, name='about'),
 ]

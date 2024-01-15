@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %}Perfil Usuario{% endblock %}
+{% block title %}Perfil avatar{% endblock %}
 
 {% block content %}
 </br>
 </br>
-<div class="container mt-5">
+<div class="container">
     <!-- Utiliza la clase 'row' para una fila y 'col-md-6' para un ancho de columna medio -->
-    <form action="{% url 'editar_perfil' %}" method="post" class="col-md-12">
+    <form action="{% url 'avatar' %}" method="post" enctype="multipart/form-data" class="col-md-12">
         {% csrf_token %}
         <!-- Utiliza clases de Bootstrap para estilizar la tabla -->
         <table class="table-dark mx-auto w-auto">

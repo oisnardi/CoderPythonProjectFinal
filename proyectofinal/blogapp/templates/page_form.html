@@ -1,10 +1,21 @@
 {% extends 'base.html' %}
 
+{% block title %}Title{% endblock %}
+
 {% block content %}
-  <h2>Crear editar post</h2>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Guardar</button>
-  </form>
+<div class="container mt-5">
+    <form method="post" enctype="multipart/form-data" class="mx-auto w-auto">
+        {% csrf_token %}
+            <!-- Utiliza clases de Bootstrap para estilizar la tabla -->
+            <table class="table-dark mx-auto">
+                {{ form.as_table }}
+            </table>
+            <!-- Utiliza la clase 'btn' y 'btn-primary' para estilizar el botón -->
+            </br>
+            <div class="text-center">
+            <input type="submit" value="Publicar" class="btn btn-primary">
+            <input type="cancel" value="Cancelar" class="btn btn-secondary" onclick="location.href ='{% url 'index' %}'">
+            </div>
+    </form>
+</div>
 {% endblock %}

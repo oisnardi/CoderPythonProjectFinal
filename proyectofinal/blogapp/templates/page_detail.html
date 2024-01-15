@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}Page detail{% endblock %}
+{% block title %}Title{% endblock %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
-    <img src="{{ page.image.url }}" alt="{{ page.title }}">
-    <p>{{ page.content }}</p>
+<h2>{{ page.title }}</h2>
+<p>{{ page.content }}</p>
+<img src="{{ page.image.url }}" alt="{{ page.title }}">
 {% endblock %}
