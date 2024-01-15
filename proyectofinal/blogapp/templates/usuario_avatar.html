@@ -5,7 +5,7 @@
 {% block content %}
 </br>
 </br>
-<div class="container">
+<div class="container mt-5">
     <!-- Utiliza la clase 'row' para una fila y 'col-md-6' para un ancho de columna medio -->
     <form action="{% url 'avatar' %}" method="post" enctype="multipart/form-data" class="col-md-12">
         {% csrf_token %}

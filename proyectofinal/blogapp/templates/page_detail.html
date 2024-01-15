@@ -3,7 +3,11 @@
 {% block title %}Title{% endblock %}
 
 {% block content %}
-<h2>{{ page.title }}</h2>
-<p>{{ page.content }}</p>
-<img src="{{ page.image.url }}" alt="{{ page.title }}">
+<div class="container mt-5">
+    <div class="text-center">
+        <img src="{{ page.image.url }}" alt="{{ page.title }}">
+    </div>
+    <h2>{{ page.title }}</h2>
+    <p>{{ page.content }}</p>
+</div>
 {% endblock %}
