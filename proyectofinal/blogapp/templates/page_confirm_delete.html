@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Title{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>¿Estás seguro de que deseas eliminar "{{ page.title }}"?</h2>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+        <a type="button" class="btn btn-secondary" href={% url 'index' %}>Cancelar</a>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog Coder{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  {% if pages %}
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for page in pages %}
+      <!--Start CARD-->
+      <div class="col">
+        <div class="card">
+          <img src="{{ page.image.url }}" class="card-img-top" alt="{{ page.title }}">
+
+          <div class="card-body">
+            <h5 class="card-title">{{ page.title }}</h5>
+            <p class="card-text">{{ page.subtitle }}</p>
+            <p class="card-text">Publicado: {{ page.published_date|date:"d/m/Y H:i" }}</p>
+            <p class="card-text">Autor: {{ page.owner.username }}</p>
+
+          </div>
+          <div class="btn-group" onclick="location.href='{% url 'page_detail' pk=page.pk %}'">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Continuar leyendo..</button>
+          </div>
+          {% if request.user.is_authenticated %}
+          <div class="btn-group" onclick="location.href='{% url 'page_update' pk=page.pk %}'">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
+          </div>
+          <div class="btn-group" onclick="location.href='{% url 'page_delete' pk=page.pk %}'">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Borrar</button>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      <!--End CARD-->
+      {% endfor %}
+  </div>
+  {% else %}
+    <div class="text-center">
+      <p>No hay páginas publicadas.</p>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

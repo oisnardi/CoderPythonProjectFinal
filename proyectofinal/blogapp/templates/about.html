@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Acerca de..{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Acerca de</h1>
+
+    <p>Bienvenido al Blog de Python, un espacio dedicado a explorar el fascinante mundo de la programación en Python. Aquí encontrarás artículos, tutoriales y consejos relacionados con el lenguaje de programación Python y su ecosistema.</p>
+
+    <h2>Sobre el Autor</h2>
+
+    <div class="author-info">
+        {% load static %}
+        <img src="{% static 'img/pexels-andrea-piacquadio-839011.jpg' %}" alt="Alejandro Isnardi" style="border-radius: 80%; max-width: 150px;">
+        <p><strong>Alejandro Isnardi</strong> es un apasionado desarrollador de software con una profunda admiración por Python. Con años de experiencia en el desarrollo de aplicaciones y un amor por compartir conocimientos, Pedro espera que este blog sea una fuente útil para programadores de todos los niveles.</p>
+    </div>
+
+    <p>No dudes en explorar los artículos y tutoriales, y si tienes alguna pregunta o sugerencia, ¡no dudes en ponerte en contacto conmigo!</p>
+</div>
+{% endblock %}
