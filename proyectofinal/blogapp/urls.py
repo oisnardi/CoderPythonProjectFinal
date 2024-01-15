@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import LogoutView
-from .views import CustomLogoutView, avatar, editar_perfil, index, login_request, page_create, page_delete, page_detail, about, page_list, page_update, registrar
+from .views import avatar, editar_perfil, index, login_request, page_create, page_delete, page_detail, about, page_list, page_update, registrar
 
 urlpatterns = [
     # Rutas para el administrador de Django
